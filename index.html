@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#123b68">
+<title>My Madrid Trip 2026 — Home</title>
+<style>
+:root{
+ --blue:#123b68;--blue2:#1e5b91;--green:#0b7a57;--gold:#c58a1b;
+ --bg:#f4f7fa;--card:#fff;--text:#182230;--muted:#667085;--line:#e4e8ee;
+ --soft:#eef4f9;--danger:#a33a32
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;font-size:15px;line-height:1.48;padding-bottom:78px}
+button{font:inherit}
+.app-header{background:linear-gradient(135deg,var(--blue),var(--blue2));color:#fff;padding:24px 16px 20px}
+.wrap{max-width:900px;margin:auto}
+.header-row{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+h1{font-size:31px;line-height:1.05;margin:0 0 7px}
+.header-sub{color:#e6eff8;margin:0;font-size:14px}
+.date-chip{background:rgba(255,255,255,.14);padding:7px 10px;border-radius:999px;font-size:12px;font-weight:800;white-space:nowrap}
+main{max-width:900px;margin:auto;padding:14px 12px}
+.screen{display:none}.screen.active{display:block}
+h2{font-size:23px;margin:4px 0 12px}
+h3{font-size:18px;margin:0 0 7px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:15px;padding:15px;margin:10px 0}
+.hero-card{background:linear-gradient(135deg,#fff,#f2f7fb)}
+.muted{color:var(--muted);font-size:13px}
+.big{font-size:21px;font-weight:800}
+.tag{display:inline-block;background:var(--soft);color:var(--blue);padding:4px 8px;border-radius:999px;font-size:11px;font-weight:800;margin-bottom:7px}
+.alert{background:#fff7e5;border:1px solid #efd28b;border-radius:12px;padding:12px}
+.danger{background:#fff0ef;border:1px solid #efb7b1;border-radius:12px;padding:12px}
+.green{color:var(--green);font-weight:800}
+.actions{display:flex;gap:8px;flex-wrap:wrap}
+.btn{border:0;background:var(--blue);color:#fff;border-radius:9px;padding:9px 12px;font-weight:750;cursor:pointer}
+.btn.secondary{background:#edf3f8;color:var(--blue)}
+.btn.small{font-size:13px;padding:7px 9px}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.quick{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.quick button{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 7px;color:var(--blue);font-weight:800;cursor:pointer}
+.quick span{display:block;font-size:21px;margin-bottom:3px}
+.event{display:grid;grid-template-columns:68px 1fr;gap:10px;padding:8px 0;border-bottom:1px dashed var(--line)}
+.event:last-child{border-bottom:0}
+.time{font-weight:800;color:var(--blue)}
+.day{border-left:4px solid var(--blue)}
+.day.current{border-left-color:var(--green)}
+.day-head{display:flex;justify-content:space-between;gap:10px}
+.day-title{font-size:18px;font-weight:800}
+details{background:var(--card);border:1px solid var(--line);border-radius:14px;margin:9px 0;overflow:hidden}
+summary{cursor:pointer;padding:14px;font-weight:800;list-style:none}
+summary::-webkit-details-marker{display:none}
+details[open] summary{border-bottom:1px solid var(--line);background:#fafbfd}
+.detail-body{padding:14px}
+.filter-row{display:flex;gap:7px;overflow:auto;padding-bottom:5px}
+.filter-row button{white-space:nowrap;border:1px solid var(--line);background:#fff;color:var(--text);border-radius:999px;padding:7px 11px;font-weight:700;cursor:pointer}
+.filter-row button.active{background:var(--blue);color:#fff;border-color:var(--blue)}
+.option{display:flex;justify-content:space-between;gap:12px;align-items:center}
+.option + .option{border-top:1px solid var(--line);padding-top:12px;margin-top:12px}
+.option-info{min-width:0}
+.option-title{font-weight:800}
+.option-meta{font-size:12px;color:var(--muted)}
+.hidden{display:none!important}
+.check{display:flex;gap:9px;padding:7px 0}
+.check input{width:17px;height:17px;margin-top:2px;accent-color:var(--blue)}
+.progress{height:8px;background:#e8edf2;border-radius:20px;overflow:hidden}
+.progress span{display:block;height:100%;width:0;background:var(--green)}
+table{width:100%;border-collapse:collapse}
+th,td{padding:9px 7px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top;font-size:13px}
+th{color:var(--muted)}
+.scroll{overflow-x:auto}
+.bottom-nav{overflow-x:auto;position:fixed;z-index:20;left:0;right:0;bottom:0;background:rgba(255,255,255,.97);border-top:1px solid var(--line);padding:7px max(8px,env(safe-area-inset-left)) calc(7px + env(safe-area-inset-bottom));box-shadow:0 -4px 18px rgba(0,0,0,.06)}
+.bottom-inner{max-width:900px;margin:auto;display:grid;grid-template-columns:repeat(5,1fr);gap:4px}
+.bottom-nav button{border:0;background:transparent;color:#667085;padding:6px 2px;border-radius:9px;font-size:11px;font-weight:750;cursor:pointer}
+.bottom-nav button.active{color:var(--blue);background:#eef4f9}
+.bottom-nav .icon{font-size:20px;display:block;line-height:1.1}
+.footer-note{text-align:center;color:var(--muted);font-size:11px;margin:25px 0 8px}
+@media(max-width:650px){
+ h1{font-size:28px}
+ .header-row{display:block}.date-chip{display:inline-block;margin-top:10px}
+ .grid{grid-template-columns:1fr}
+ .quick{grid-template-columns:repeat(4,1fr)}
+ .quick button{font-size:11px;padding:10px 3px}
+ .quick span{font-size:19px}
+ .option{align-items:flex-start}
+ .event{grid-template-columns:59px 1fr}
+}
+@media(max-width:390px){
+ .quick{grid-template-columns:repeat(2,1fr)}
+}
+@media print{
+ .bottom-nav,.quick,.actions{display:none!important}
+ .screen{display:block!important}
+ body{background:#fff}
+ .card,details{box-shadow:none;break-inside:avoid}
+}
+</style>
+
+<link rel="manifest" href="manifest.json">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+
+</head>
+<body>
+
+<header class="app-header">
+<div class="wrap">
+<div class="header-row">
+<div>
+<h1>My Madrid Trip 🇪🇸</h1>
+<p class="header-sub">Business • Madrid • Toledo • Segovia • Abu Dhabi</p>
+</div>
+<div class="date-chip">26 Sep – 08 Oct 2026</div>
+</div>
+</div>
+</header>
+
+<main>
+
+<!-- TODAY -->
+<section id="home" class="screen active">
+<h2>Welcome 👋</h2>
+<div class="card hero-card">
+  <span class="tag">26 SEP – 08 OCT 2026</span>
+  <div class="big">Madrid Business Trip</div>
+  <p class="muted">India → Abu Dhabi → Madrid → Abu Dhabi → India</p>
+</div>
+
+<div class="grid">
+  <div class="card">
+    <div class="muted">💼 Business</div>
+    <strong>28 Sep – 02 Oct</strong>
+    <div class="muted">Company handles office travel & food</div>
+  </div>
+  <div class="card">
+    <div class="muted">🏛️ Day trips</div>
+    <strong>04 & 05 Oct</strong>
+    <div class="muted">Toledo & Segovia</div>
+  </div>
+  <div class="card">
+    <div class="muted">🏨 Madrid stay</div>
+    <strong>27 Sep – 06 Oct</strong>
+    <div class="muted">Two hotels</div>
+  </div>
+  <div class="card">
+    <div class="muted">🇦🇪 Layover</div>
+    <strong>07 Oct</strong>
+    <div class="muted">Abu Dhabi sightseeing</div>
+  </div>
+</div>
+
+<div class="card">
+  <h3>✈️ Flight summary</h3>
+  <div class="event"><div class="time">26 Sep</div><div><strong>TRV 21:50</strong> → Madrid 08:10 on 27 Sep</div></div>
+  <div class="event"><div class="time">06 Oct</div><div><strong>MAD 21:50</strong> → Trivandrum 02:50 on 08 Oct</div></div>
+  <p class="muted">1 stop via Abu Dhabi on both journeys.</p>
+</div>
+
+<div class="card">
+  <h3>📍 Key places</h3>
+  <div class="event"><div class="time">Madrid</div><div>Office + evening sightseeing</div></div>
+  <div class="event"><div class="time">Toledo</div><div>04 October</div></div>
+  <div class="event"><div class="time">Segovia</div><div>05 October</div></div>
+  <div class="event"><div class="time">Abu Dhabi</div><div>07 October layover</div></div>
+</div>
+
+</section>
+
+<!-- PLAN -->
+<section id="plan" class="screen">
+<h2>📅 Trip Plan</h2>
+<p class="muted">Tap a day to see only that day's schedule.</p>
+<div id="planList"></div>
+</section>
+
+<!-- EXPLORE -->
+<section id="explore" class="screen">
+<h2>🗺️ Explore</h2>
+<div class="filter-row">
+<button class="active" data-filter="all" onclick="filterPlaces('all',this)">All</button>
+<button data-filter="madrid" onclick="filterPlaces('madrid',this)">Madrid</button>
+<button data-filter="toledo" onclick="filterPlaces('toledo',this)">Toledo</button>
+<button data-filter="segovia" onclick="filterPlaces('segovia',this)">Segovia</button>
+<button data-filter="abudhabi" onclick="filterPlaces('abudhabi',this)">Abu Dhabi</button>
+</div>
+<div id="places"></div>
+</section>
+
+<!-- CHECKLIST -->
+<section id="check" class="screen">
+<h2>🎒 Checklist</h2>
+<div class="card">
+<div class="muted">Packing progress</div>
+<div class="progress"><span id="bar"></span></div>
+<div class="muted" id="status">0 completed</div>
+<div class="actions" style="margin-top:9px">
+<button class="btn" onclick="window.print()">Print / Save PDF</button>
+<button class="btn secondary" onclick="resetChecks()">Reset</button>
+</div>
+</div>
+
+<details open><summary>📄 Documents</summary><div class="detail-body checklist">
+<label class="check"><input type="checkbox">Passport</label>
+<label class="check"><input type="checkbox">Schengen visa</label>
+<label class="check"><input type="checkbox">UAE entry/transit permission</label>
+<label class="check"><input type="checkbox">Flight tickets / PNR</label>
+<label class="check"><input type="checkbox">Hotel bookings</label>
+<label class="check"><input type="checkbox">Travel insurance</label>
+<label class="check"><input type="checkbox">Company invitation / business letter</label>
+<label class="check"><input type="checkbox">Conference registration / agenda</label>
+<label class="check"><input type="checkbox">Company ID</label>
+<label class="check"><input type="checkbox">Emergency contacts</label>
+</div></details>
+
+<details><summary>💻 Work & electronics</summary><div class="detail-body checklist">
+<label class="check"><input type="checkbox">Laptop</label>
+<label class="check"><input type="checkbox">Laptop charger</label>
+<label class="check"><input type="checkbox">Phone + charger</label>
+<label class="check"><input type="checkbox">Universal travel adapter</label>
+<label class="check"><input type="checkbox">Power bank</label>
+<label class="check"><input type="checkbox">USB-C hub / HDMI adapter</label>
+<label class="check"><input type="checkbox">Headphones</label>
+<label class="check"><input type="checkbox">Presentation backup</label>
+</div></details>
+
+<details><summary>👔 Clothes & essentials</summary><div class="detail-body checklist">
+<label class="check"><input type="checkbox">Business shirts</label>
+<label class="check"><input type="checkbox">Formal trousers</label>
+<label class="check"><input type="checkbox">Blazer / smart jacket</label>
+<label class="check"><input type="checkbox">Formal shoes</label>
+<label class="check"><input type="checkbox">Casual clothes</label>
+<label class="check"><input type="checkbox">Comfortable walking shoes</label>
+<label class="check"><input type="checkbox">Light jacket</label>
+<label class="check"><input type="checkbox">Sunglasses</label>
+<label class="check"><input type="checkbox">Small umbrella</label>
+<label class="check"><input type="checkbox">Personal medicines</label>
+</div></details>
+
+<details><summary>📱 Before leaving India</summary><div class="detail-body checklist">
+<label class="check"><input type="checkbox">Activate roaming / eSIM</label>
+<label class="check"><input type="checkbox">Enable international card payments</label>
+<label class="check"><input type="checkbox">Download offline maps</label>
+<label class="check"><input type="checkbox">Save digital document copies</label>
+<label class="check"><input type="checkbox">Confirm UAE airport-exit eligibility</label>
+<label class="check"><input type="checkbox">Confirm Toledo / Segovia trains</label>
+</div></details>
+</section>
+
+
+<!-- MORE -->
+<section id="more" class="screen">
+<h2>⋮ More</h2>
+
+<details open><summary>✈️ Flights</summary><div class="detail-body">
+<div class="card"><span class="tag">OUTBOUND</span><h3>TRV → Abu Dhabi → MAD</h3><p><strong>26 Sep • 21:50</strong> from Trivandrum<br><strong>27 Sep • 08:10</strong> Madrid arrival<br>13h 50m • 1 stop</p></div>
+<div class="card"><span class="tag">RETURN</span><h3>MAD → Abu Dhabi → TRV</h3><p><strong>06 Oct • 21:50</strong> from Madrid<br><strong>08 Oct • 02:50</strong> Trivandrum arrival<br>25h 30m • 1 stop</p></div>
+<p class="muted">The supplied screenshot does not show exact Abu Dhabi segment timings. Check the Etihad PNR for those.</p>
+</div></details>
+
+<details><summary>🏨 Hotels</summary><div class="detail-body">
+<div class="card"><span class="tag">27 SEP → 04 OCT</span><h3>NH Collection Madrid Abascal</h3><p>Calle de José Abascal, 47</p><p class="muted">Useful Metro: Alonso Cano / Gregorio Marañón.</p></div>
+<div class="card"><span class="tag">04 OCT → 06 OCT</span><h3>Calle de Pardo Bazán 58</h3><p>28016 Madrid</p><p class="muted">Concha Espina ≈ 7 min walk. Colombia ≈ 14 min walk.</p></div>
+</div></details>
+
+<details><summary>💰 Budget</summary><div class="detail-body">
+<p class="muted">Company covers expenses through 04 Oct, as you stated.</p>
+<div class="scroll"><table>
+<tr><th>Item</th><th>Budget</th><th>Comfort</th></tr>
+<tr><td>Madrid transport</td><td>₹5k–7k</td><td>₹8k–10k</td></tr>
+<tr><td>Toledo</td><td>~₹7,040</td><td>₹8k–10k</td></tr>
+<tr><td>Segovia</td><td>₹5.2k–5.7k</td><td>₹6k–8k</td></tr>
+<tr><td>Food 05–06 Oct</td><td>₹6k–9k</td><td>₹10k–15k</td></tr>
+<tr><td>Airport transfer</td><td>₹2k–3k</td><td>₹3k–4k</td></tr>
+<tr><td>Abu Dhabi</td><td>₹3.5k–5k</td><td>₹7k–10k</td></tr>
+</table></div>
+<p><strong>Recommended personal reserve: ₹30,000–35,000</strong></p>
+</div></details>
+
+<details><summary>⚠️ Important reminders</summary><div class="detail-body">
+<div class="danger"><strong>UAE:</strong> confirm your visa/entry permission before leaving Abu Dhabi airport.</div>
+<p>Recheck museum free-entry periods, attraction hours and train schedules shortly before the trip.</p>
+</div></details>
+
+<details><summary>🔗 Useful links</summary><div class="detail-body">
+<ul>
+<li><a href="https://www.museodelprado.es/en/visit/plan-your-visit" target="_blank">Prado</a></li>
+<li><a href="https://www.museoreinasofia.es/en/visit/individual-visits/" target="_blank">Reina Sofía</a></li>
+<li><a href="https://www.patrimonionacional.es/en/visita/royal-palace-madrid" target="_blank">Royal Palace</a></li>
+<li><a href="https://www.crtm.es/billete-turistico?lang=en&zona=A" target="_blank">Madrid Transport</a></li>
+<li><a href="https://turismodesegovia.com/" target="_blank">Segovia Tourism</a></li>
+<li><a href="https://visitabudhabi.ae/en/things-to-do/culture/landmarks-and-architecture/sheikh-zayed-grand-mosque" target="_blank">Experience Abu Dhabi</a></li>
+<li><a href="https://www.louvreabudhabi.ae/visit-us" target="_blank">Louvre Abu Dhabi</a></li>
+</ul>
+</div></details>
+</section>
+
+</main>
+
+<nav class="bottom-nav">
+<div class="bottom-inner">
+<button class="active" data-screen="home" onclick="showScreen('home')"><span class="icon">🏠</span>Home</button>
+<button data-screen="plan" onclick="showScreen('plan')"><span class="icon">📅</span>Plan</button>
+<button data-screen="explore" onclick="showScreen('explore')"><span class="icon">🗺️</span>Explore</button>
+<button data-screen="check" onclick="showScreen('check')"><span class="icon">🎒</span>Check</button>
+<button data-screen="more" onclick="showScreen('more')"><span class="icon">⋮</span>More</button>
+</div>
+</nav>
+
+<script>
+const trip = [
+ {date:'2026-09-26', label:'26 Sep', title:'Trivandrum → Abu Dhabi', tag:'FLIGHT', events:[
+  ['21:50','Depart Trivandrum (TRV).']
+ ]},
+ {date:'2026-09-27', label:'27 Sep', title:'Madrid arrival + easy evening', tag:'MADRID', events:[
+  ['08:10','Arrive Madrid → immigration → baggage → Hotel 1.'],
+  ['17:00','Plaza de España → Royal Palace exterior → Almudena.'],
+  ['19:00','Plaza Mayor → Mercado de San Miguel → Sol.'],
+  ['20:30','Gran Vía → dinner → hotel.']
+ ]},
+ {date:'2026-09-28', label:'28 Sep', title:'Office + Gran Vía', tag:'BUSINESS', events:[
+  ['AM–PM','Conference / workshop.'],
+  ['18:30','Gran Vía → Plaza de España → Royal Palace area.'],
+  ['20:30','Plaza de Oriente → Teatro Real → dinner.']
+ ]},
+ {date:'2026-09-29', label:'29 Sep', title:'Office + Prado', tag:'BUSINESS', events:[
+  ['AM–PM','Conference / workshop.'],
+  ['18:00–20:00','Prado free-entry period, subject to current rules/capacity.'],
+  ['20:00','Cibeles → Puerta de Alcalá → Retiro edge.']
+ ]},
+ {date:'2026-09-30', label:'30 Sep', title:'Office + Reina Sofía', tag:'BUSINESS', events:[
+  ['AM–PM','Conference / workshop.'],
+  ['19:00–21:00','Reina Sofía free-entry period. Prioritize Guernica.'],
+  ['21:00+','Atocha / Lavapiés dinner → hotel.']
+ ]},
+ {date:'2026-10-01', label:'01 Oct', title:'Office + Royal Madrid', tag:'BUSINESS', events:[
+  ['AM–PM','Conference / workshop.'],
+  ['18:00','Royal Palace interior if desired.'],
+  ['20:00','Almudena → Plaza Mayor → Sol → dinner.']
+ ]},
+ {date:'2026-10-02', label:'02 Oct', title:'Office + Retiro', tag:'BUSINESS', events:[
+  ['AM–PM','Final conference / workshop.'],
+  ['18:30','Puerta de Alcalá → Retiro → Crystal Palace.'],
+  ['20:30','Salamanca / Serrano → dinner.']
+ ]},
+ {date:'2026-10-03', label:'03 Oct', title:'Full Madrid day', tag:'MADRID', events:[
+  ['09:30','Royal Palace interior.'],
+  ['11:00','Almudena → Plaza Mayor → Sol.'],
+  ['14:00','Retiro Park + Crystal Palace.'],
+  ['17:30','Temple of Debod + Plaza de España.'],
+  ['20:30','Prado de Noche — confirm 2026 schedule.']
+ ]},
+ {date:'2026-10-04', label:'04 Oct', title:'Toledo + hotel change', tag:'DAY TRIP', events:[
+  ['07:00','Check out / leave luggage at Hotel 1 if possible.'],
+  ['08:00','Atocha.'],
+  ['AM','Train to Toledo.'],
+  ['09:30–18:30','Cathedral → Jewish Quarter → San Juan de los Reyes → Santa María la Blanca → Santo Tomé → Alcázar → Mirador.'],
+  ['EVENING','Return Madrid → collect luggage → taxi to Hotel 2.']
+ ]},
+ {date:'2026-10-05', label:'05 Oct', title:'Segovia', tag:'DAY TRIP', events:[
+  ['07:45','Hotel 2 → Concha Espina → Chamartín.'],
+  ['09:00','Train to Segovia-Guiomar.'],
+  ['10:15–18:00','Aqueduct → Old Town → Cathedral → Alcázar → Jewish Quarter / viewpoints.'],
+  ['EVENING','Train back → Hotel 2.']
+ ]},
+ {date:'2026-10-06', label:'06 Oct', title:'Final Madrid → Abu Dhabi', tag:'FLIGHT', events:[
+  ['09:00–12:00','Optional Bernabéu / Salamanca / shopping.'],
+  ['17:30','Leave Hotel 2 for Madrid Airport.'],
+  ['18:00','Target airport arrival.'],
+  ['21:50','Madrid → Abu Dhabi.']
+ ]},
+ {date:'2026-10-07', label:'07 Oct', title:'Abu Dhabi layover', tag:'ABU DHABI', events:[
+  ['07:00','Arrive Abu Dhabi.'],
+  ['07:00–08:30','Immigration / UAE entry formalities.'],
+  ['09:00–11:00','Sheikh Zayed Grand Mosque — free.'],
+  ['11:00–12:00','Wahat Al Karama — free.'],
+  ['12:15–13:15','Corniche — free.'],
+  ['13:30–15:30','Louvre Abu Dhabi — optional, AED 70 current reference.'],
+  ['15:30–17:00','Heritage Village / Corniche.'],
+  ['17:00–18:00','Return to airport.']
+ ]},
+ {date:'2026-10-08', label:'08 Oct', title:'Arrive Trivandrum', tag:'HOME', events:[
+  ['02:50','Arrive Trivandrum.']
+ ]}
+];
+
+const places = [
+ {cat:'madrid',title:'Prado Museum',meta:'18:00–20:00 free period • ~20–25 min from Hotel 1',cost:'Free in applicable evening period',note:'Best for 29 Sep.'},
+ {cat:'madrid',title:'Reina Sofía',meta:'19:00–21:00 free period • ~20–25 min from Hotel 1',cost:'Free in applicable evening period',note:'See Guernica.'},
+ {cat:'madrid',title:'Royal Palace',meta:'~20–25 min from Hotel 1',cost:'Paid interior; exterior free',note:'Best on 03 Oct.'},
+ {cat:'madrid',title:'Retiro + Crystal Palace',meta:'~20–25 min from Hotel 1',cost:'Free',note:'Ideal evening.'},
+ {cat:'madrid',title:'Temple of Debod',meta:'~20–25 min from Hotel 1',cost:'Free',note:'Best around sunset.'},
+ {cat:'madrid',title:'Gran Vía + Plaza de España',meta:'~15–20 min by Metro from Hotel 1',cost:'Free',note:'Easy office-day evening.'},
+ {cat:'toledo',title:'Toledo',meta:'Full day • Madrid Atocha → Toledo',cost:'~€64 / ₹7,040',note:'Cathedral, Jewish Quarter, Alcázar, Mirador.'},
+ {cat:'segovia',title:'Segovia',meta:'Full day • Chamartín → Segovia-Guiomar',cost:'~€47–52 / ₹5,200–5,720',note:'Aqueduct, Cathedral, Alcázar.'},
+ {cat:'abudhabi',title:'Sheikh Zayed Grand Mosque',meta:'09:00–11:00 target',cost:'Free',note:'Confirm UAE entry permission first.'},
+ {cat:'abudhabi',title:'Wahat Al Karama',meta:'Near Grand Mosque',cost:'Free',note:'Short cultural/photo stop.'},
+ {cat:'abudhabi',title:'Corniche',meta:'12:15–13:15 target',cost:'Free',note:'Waterfront.'},
+ {cat:'abudhabi',title:'Louvre Abu Dhabi',meta:'13:30–15:30 optional',cost:'AED 70 current reference',note:'Choose this OR Qasr Al Watan.'}
+];
+
+function formatDate(d){
+ const x=new Date(d+'T12:00:00');
+ return x.toLocaleDateString('en-IN',{weekday:'long',day:'numeric',month:'long'});
+}
+function renderPlan(){
+ let out='';
+ trip.forEach(d=>{
+   const current='';
+   out+=`<details class="day${current}"><summary><span class="tag">${d.tag}</span><div class="day-title">${d.label} — ${d.title}</div></summary><div class="detail-body">`;
+   d.events.forEach(e=>out+=`<div class="event"><div class="time">${e[0]}</div><div>${e[1]}</div></div>`);
+   out+='</div></details>';
+ });
+ document.getElementById('planList').innerHTML=out;
+}
+function renderPlaces(filter='all'){
+ let out='';
+ places.filter(p=>filter==='all'||p.cat===filter).forEach(p=>{
+  out+=`<div class="card option"><div class="option-info"><div class="option-title">${p.title}</div><div class="option-meta">${p.meta}</div><div class="option-meta">${p.note}</div></div><div><div class="green" style="font-size:12px;text-align:right;margin-bottom:5px">${p.cost}</div></div></div>`;
+ });
+ document.getElementById('places').innerHTML=out;
+}
+function filterPlaces(filter,btn){
+ document.querySelectorAll('.filter-row button').forEach(x=>x.classList.remove('active'));
+ btn.classList.add('active'); renderPlaces(filter);
+}
+function showScreen(id){
+ document.querySelectorAll('.screen').forEach(x=>x.classList.remove('active'));
+ document.getElementById(id).classList.add('active');
+ document.querySelectorAll('.bottom-nav button').forEach(x=>x.classList.toggle('active',x.dataset.screen===id));
+ window.scrollTo({top:0,behavior:'smooth'});
+}
+const checks=[...document.querySelectorAll('.check input')];
+checks.forEach((x,i)=>{
+ x.checked=localStorage.getItem('trip2026_'+i)==='1';
+ x.addEventListener('change',()=>{localStorage.setItem('trip2026_'+i,x.checked?'1':'0');updateChecks()});
+});
+function updateChecks(){
+ const done=checks.filter(x=>x.checked).length,pct=Math.round(done/checks.length*100);
+ document.getElementById('bar').style.width=pct+'%';
+ document.getElementById('status').textContent=`${done} of ${checks.length} completed (${pct}%)`;
+}
+function resetChecks(){
+ checks.forEach((x,i)=>{x.checked=false;localStorage.removeItem('trip2026_'+i)});
+ updateChecks();
+}
+renderPlan();renderPlaces();updateChecks();
+</script>
+
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./service-worker.js").catch(() => {});
+  });
+}
+</script>
+
+</body>
+</html>
