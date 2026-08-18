@@ -71,10 +71,10 @@ th,td{padding:9px 7px;border-bottom:1px solid var(--line);text-align:left;vertic
 th{color:var(--muted)}
 .scroll{overflow-x:auto}
 .bottom-nav{overflow-x:auto;position:fixed;z-index:20;left:0;right:0;bottom:0;background:rgba(255,255,255,.97);border-top:1px solid var(--line);padding:7px max(8px,env(safe-area-inset-left)) calc(7px + env(safe-area-inset-bottom));box-shadow:0 -4px 18px rgba(0,0,0,.06)}
-.bottom-inner{max-width:900px;margin:auto;display:grid;grid-template-columns:repeat(5,1fr);gap:4px}
-.bottom-nav button{border:0;background:transparent;color:#667085;padding:6px 2px;border-radius:9px;font-size:11px;font-weight:750;cursor:pointer}
+.bottom-inner{max-width:900px;margin:auto;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:3px}
+.bottom-nav button{border:0;background:transparent;color:#667085;padding:6px 2px;border-radius:9px;font-size:10px;font-weight:750;cursor:pointer}
 .bottom-nav button.active{color:var(--blue);background:#eef4f9}
-.bottom-nav .icon{font-size:20px;display:block;line-height:1.1}
+.bottom-nav .icon{font-size:18px;display:block;line-height:1.1}
 .footer-note{text-align:center;color:var(--muted);font-size:11px;margin:25px 0 8px}
 @media(max-width:650px){
  h1{font-size:28px}
@@ -147,8 +147,8 @@ th{color:var(--muted)}
 
 <div class="card">
   <h3>✈️ Flight summary</h3>
-  <div class="event"><div class="time">26 Sep</div><div><strong>TRV 21:50</strong> → Madrid 08:10 on 27 Sep</div></div>
-  <div class="event"><div class="time">06 Oct</div><div><strong>MAD 21:50</strong> → Trivandrum 02:50 on 08 Oct</div></div>
+  <div class="event"><div class="time">26 Sep</div><div><strong>TRV 21:55</strong> → Madrid 08:00 on 27 Sep</div></div>
+  <div class="event"><div class="time">06 Oct</div><div><strong>MAD 21:00</strong> → Trivandrum 02:50 on 08 Oct</div></div>
   <p class="muted">1 stop via Abu Dhabi on both journeys.</p>
 </div>
 
@@ -165,21 +165,99 @@ th{color:var(--muted)}
 <!-- PLAN -->
 <section id="plan" class="screen">
 <h2>📅 Trip Plan</h2>
-<p class="muted">Tap a day to see only that day's schedule.</p>
+<p class="muted">Tap a date to expand it. Opening another page automatically closes open sections here.</p>
 <div id="planList"></div>
 </section>
 
 <!-- EXPLORE -->
 <section id="explore" class="screen">
 <h2>🗺️ Explore</h2>
+<p class="muted">Browse destinations and sightseeing options. Tap a place for details. Your detailed day-by-day route is in <strong>Plan</strong>.</p>
 <div class="filter-row">
-<button class="active" data-filter="all" onclick="filterPlaces('all',this)">All</button>
-<button data-filter="madrid" onclick="filterPlaces('madrid',this)">Madrid</button>
-<button data-filter="toledo" onclick="filterPlaces('toledo',this)">Toledo</button>
-<button data-filter="segovia" onclick="filterPlaces('segovia',this)">Segovia</button>
-<button data-filter="abudhabi" onclick="filterPlaces('abudhabi',this)">Abu Dhabi</button>
+<button class="active" onclick="filterPlaces('all',this)">All</button><button onclick="filterPlaces('madrid',this)">🇪🇸 Madrid</button><button onclick="filterPlaces('toledo',this)">🏛️ Toledo</button><button onclick="filterPlaces('segovia',this)">🏰 Segovia</button><button onclick="filterPlaces('abudhabi',this)">🇦🇪 Abu Dhabi</button>
 </div>
-<div id="places"></div>
+<div id="places">
+<details class="card" data-cat="madrid"><summary><span class="tag">MADRID</span><h3>Prado Museum</h3></summary><div class="detail-body"><p><strong>Best day:</strong> Tue 29 Sep • <strong>Travel:</strong> Metro from Gregorio Marañón → Tribunal → Line 1 → Estación del Arte.</p><p><strong>Time:</strong> target 17:40–18:00 • <strong>Normal:</strong> paid • <strong>Free:</strong> Mon–Sat 18:00–20:00, subject to capacity/admission procedure.</p></div></details>
+<details class="card" data-cat="madrid"><summary><span class="tag">MADRID</span><h3>Reina Sofía Museum</h3></summary><div class="detail-body"><p><strong>Best day:</strong> Thu 01 Oct • <strong>Travel:</strong> Metro Line 10 → Tribunal → Line 1 → Atocha.</p><p><strong>Normal:</strong> €12 reference • <strong>Free:</strong> current Thursday evening free period 19:00–21:00; check capacity/ticket procedure.</p></div></details>
+<details class="card" data-cat="madrid"><summary><span class="tag">MADRID</span><h3>Royal Palace + Almudena</h3></summary><div class="detail-body"><p><strong>Travel:</strong> Line 10 from Gregorio Marañón → Plaza de España, then walk through Sabatini Gardens.</p><p><strong>Royal Palace:</strong> paid normally; eligible visitors may use the Mon–Thu 17:00–19:00 free window in September. <strong>Almudena:</strong> main cathedral area generally free; dome/museum paid.</p></div></details>
+<details class="card" data-cat="madrid"><summary><span class="tag">MADRID</span><h3>Retiro + Crystal Palace</h3></summary><div class="detail-body"><p><strong>Travel:</strong> Metro to Atocha/Retiro area or walk from Reina Sofía.</p><p><strong>Entry:</strong> <span class="green">FREE</span> for the park/outdoor visit.</p></div></details>
+<details class="card" data-cat="madrid"><summary><span class="tag">MADRID</span><h3>Temple of Debod</h3></summary><div class="detail-body"><p><strong>Travel:</strong> Sol → Line 3 → Ventura Rodríguez + walk.</p><p><strong>Entry:</strong> <span class="green">FREE</span> for exterior/sunset viewing. Interior has controlled seasonal hours; do not rely on entry after sunset.</p></div></details>
+<details class="card" data-cat="madrid"><summary><span class="tag">MADRID</span><h3>Sol • Plaza Mayor • Gran Vía • Cibeles • Colón</h3></summary><div class="detail-body"><p><strong>Travel:</strong> Metro Line 1/10 and walking.</p><p><strong>Entry:</strong> <span class="green">FREE</span> outdoor sightseeing. Great for evenings.</p></div></details>
+<details class="card" data-cat="madrid"><summary><span class="tag">MADRID</span><h3>Ponzano Tapas</h3></summary><div class="detail-body"><p><strong>From Hotel 1:</strong> Walk toward Calle de Ponzano.</p><p><strong>Entry:</strong> <span class="green">FREE</span> • food/drinks paid. Planning range €3–€6 per tapa/plate.</p></div></details>
+<details class="card" data-cat="toledo"><summary><span class="tag">TOLEDO • 04 OCT</span><h3>Toledo Old Town</h3></summary><div class="detail-body"><p><strong>From Madrid:</strong> High-speed train from Atocha takes about 30 minutes. </p><p><strong>Suggested route:</strong> Cathedral → Jewish Quarter → San Juan de los Reyes → Santa María la Blanca → Santo Tomé → Alcázar → Mirador del Valle.</p><p><strong>Free:</strong> Old-town streets, viewpoints and exterior sightseeing. Individual monuments are ticketed.</p></div></details>
+<details class="card" data-cat="segovia"><summary><span class="tag">SEGOVIA • 05 OCT</span><h3>Aqueduct • Cathedral • Alcázar</h3></summary><div class="detail-body"><p><strong>From Madrid:</strong> High-speed train from Chamartín to Segovia-Guiomar; then local bus/taxi into the centre.</p><p><strong>Free:</strong> Aqueduct exterior, historic streets and many viewpoints. Cathedral/Alcázar interiors are ticketed. </p></div></details>
+<details class="card" data-cat="abudhabi"><summary><span class="tag">ABU DHABI • 07 OCT</span><h3>Sheikh Zayed Grand Mosque</h3></summary><div class="detail-body">
+<p><strong>Best use of your layover:</strong> Make this your main Abu Dhabi landmark.</p>
+<p><strong>From Zayed International Airport:</strong> Taxi/Careem is the most time-efficient for a long layover. Abu Dhabi's official tourism service also lists a free Experience Abu Dhabi shuttle on some routes; check the current airport service/schedule before relying on it.</p>
+<p><strong>Entry:</strong> <span class="green">FREE</span>. Free guided tours are also available. Advance visit booking is recommended.</p>
+<p><strong>Allow:</strong> about 1.5–2 hours including entry/security.</p>
+<p><strong>Important:</strong> Dress modestly; shoulders and knees must be covered.</p>
+</div></details>
+
+<details class="card" data-cat="abudhabi"><summary><span class="tag">ABU DHABI • FREE</span><h3>Wahat Al Karama</h3></summary><div class="detail-body">
+<p><strong>Why visit:</strong> UAE national memorial opposite the Grand Mosque, making it a natural second stop.</p>
+<p><strong>Travel:</strong> 🚕 Short taxi ride from the Grand Mosque, or use the pedestrian connection/shuttle options when operating.</p>
+<p><strong>Entry:</strong> <span class="green">FREE</span>.</p>
+<p><strong>Hours:</strong> Visitor centre 09:00–19:00; memorial plaza is open 24 hours according to the official tourism listing.</p>
+</div></details>
+
+<details class="card" data-cat="abudhabi"><summary><span class="tag">ABU DHABI • FREE</span><h3>Heritage Village</h3></summary><div class="detail-body">
+<p><strong>Location:</strong> Corniche Breakwater near Marina Mall.</p>
+<p><strong>Why visit:</strong> Traditional souk, mosque, desert camp and demonstrations of Emirati crafts such as pottery, glassblowing and weaving.</p>
+<p><strong>Travel:</strong> 🚕 Taxi/Careem from central Abu Dhabi; combine it with Corniche and Founder’s Memorial.</p>
+<p><strong>Entry:</strong> <span class="green">FREE</span> as a heritage visit; check the day's operating hours/events before going.</p>
+<p><strong>Recommended:</strong> 45–90 minutes.</p>
+</div></details>
+
+<details class="card" data-cat="abudhabi"><summary><span class="tag">ABU DHABI • FREE</span><h3>The Founder's Memorial</h3></summary><div class="detail-body">
+<p><strong>Why visit:</strong> Beautiful cultural memorial dedicated to Sheikh Zayed, with The Constellation artwork.</p>
+<p><strong>Travel:</strong> 🚕 Taxi/Careem; combine with Heritage Village and Corniche.</p>
+<p><strong>Entry:</strong> <span class="green">FREE</span> for all.</p>
+<p><strong>Hours:</strong> 09:00–22:00 daily. Complimentary 30-minute cultural tours are available; individual visitors generally do not need advance booking.</p>
+</div></details>
+
+<details class="card" data-cat="abudhabi"><summary><span class="tag">ABU DHABI • FREE</span><h3>Abu Dhabi Corniche + Public Beach</h3></summary><div class="detail-body">
+<p><strong>Why visit:</strong> 8 km waterfront promenade, skyline views, gardens and sunset.</p>
+<p><strong>Travel:</strong> 🚕 Taxi/Careem; easy to combine with Heritage Village and Founder’s Memorial.</p>
+<p><strong>Entry:</strong> <span class="green">FREE</span> for the public beach and waterfront. The Al Sahil section (Gate 4) is listed as free entry; other beach sections may have a fee.</p>
+<p><strong>Best time:</strong> Late afternoon/sunset or evening.</p>
+</div></details>
+
+<details class="card" data-cat="abudhabi"><summary><span class="tag">ABU DHABI • FREE</span><h3>Qasr Al Hosn + House of Artisans + Cultural Foundation</h3></summary><div class="detail-body">
+<p><strong>Why visit:</strong> Best compact heritage stop in central Abu Dhabi. See the House of Artisans, Cultural Foundation and outdoor Al Hosn spaces.</p>
+<p><strong>Travel:</strong> 🚕 Taxi/Careem from Corniche, or local bus.</p>
+<p><strong>Free:</strong> House of Artisans, Cultural Foundation and outdoor spaces are complimentary. <strong>Qasr Al Hosn fort interior:</strong> paid, currently starting at AED 30.</p>
+<p><strong>Best for:</strong> Culture without spending on a museum ticket.</p>
+</div></details>
+
+<details class="card" data-cat="abudhabi"><summary><span class="tag">ABU DHABI • OPTIONAL PAID</span><h3>Louvre Abu Dhabi</h3></summary><div class="detail-body">
+<p><strong>Why visit:</strong> Excellent if your layover remains comfortable after immigration, transport and the free cultural stops.</p>
+<p><strong>Travel:</strong> 🚕 Taxi/Careem to Saadiyat Island.</p>
+<p><strong>Entry:</strong> Paid; verify the current AED ticket price and opening hours before travel.</p>
+<p><strong>Priority:</strong> Secondary — do not let it make you rush the airport return.</p>
+</div></details>
+
+<details class="card" data-cat="abudhabi"><summary><span class="tag">ABU DHABI • FREE</span><h3>Free Abu Dhabi Shuttle / Budget Option</h3></summary><div class="detail-body">
+<p>Experience Abu Dhabi promotes free shuttle-bus options connecting selected tourist areas. Routes and departure times can change, so check the official schedule shortly before your 07 Oct layover.</p>
+<p><strong>Best strategy:</strong> Use taxi/Careem for the time-critical airport-to-city and city-to-airport legs; use a free shuttle only when its timetable fits your layover.</p>
+</div></details>
+
+<details class="card"><summary>💡 Best Abu Dhabi free-day combination</summary><div class="detail-body">
+<p><strong>Recommended order:</strong></p>
+<ol>
+<li>✈️ Airport formalities</li>
+<li>🕌 Sheikh Zayed Grand Mosque</li>
+<li>🕊️ Wahat Al Karama</li>
+<li>🏛️ Heritage Village</li>
+<li>🌊 Corniche / public beach</li>
+<li>⭐ Founder's Memorial</li>
+<li>🏛️ Qasr Al Hosn / House of Artisans if time remains</li>
+<li>✈️ Return to Zayed International Airport with a generous buffer before your 21:00 flight</li>
+</ol>
+<p class="green"><strong>Core sightseeing cost:</strong> You can make most of this Abu Dhabi layover with <strong>AED 0 attraction fees</strong>; your main personal transport/food costs will be separate.</p>
+</div></details>
+
+</div>
 </section>
 
 <!-- CHECKLIST -->
@@ -263,25 +341,61 @@ th{color:var(--muted)}
 </div>
 </div></details>
 
-<details><summary>📱 Before leaving India</summary><div class="detail-body checklist">
-<label class="check"><input type="checkbox">Activate roaming / eSIM</label>
+<details><summary>📌 Final document check</summary><div class="detail-body checklist">
 <label class="check"><input type="checkbox">Enable international card payments</label>
-<label class="check"><input type="checkbox">Download offline maps</label>
-<label class="check"><input type="checkbox">Save digital document copies</label>
-<label class="check"><input type="checkbox">Confirm UAE airport-exit eligibility</label>
-<label class="check"><input type="checkbox">Confirm Toledo / Segovia trains</label>
+<label class="check"><input type="checkbox">Save digital document copies offline</label>
 </div></details>
 </section>
 
+
+<!-- REMINDERS -->
+<section id="reminders" class="screen">
+<h2>🔔 Reminders</h2>
+<p class="muted">Only Abu Dhabi online bookings, reservations and complimentary benefits you need to arrange before the trip. Packing and documents stay in <strong>Check</strong>.</p>
+
+<div class="card">
+<h3>🇦🇪 Abu Dhabi — complimentary / free-entry arrangements</h3>
+<div class="checklist">
+<label class="check"><input type="checkbox">UAE transit visa — apply online only if required for leaving the airport during the layover</label>
+<label class="check"><input type="checkbox">Etihad Stopover — check eligibility in Manage Booking</label>
+<label class="check"><input type="checkbox">Complimentary Etihad stopover hotel — book the eligible hotel and save the voucher</label>
+<label class="check"><input type="checkbox">Etihad Stopover Pass — claim/save the complimentary digital pass if eligible</label>
+<label class="check"><input type="checkbox">Etihad Manage Booking — check whether your booking provides a complimentary meal/food voucher and claim it if available</label>
+<label class="check"><input type="checkbox">Sheikh Zayed Grand Mosque — complete the free visitor registration/reservation if required</label>
+</div>
+
+<div class="alert">
+<strong>Free sightseeing:</strong> Heritage Village, Wahat Al Karama, Founder's Memorial, Corniche/public beach and the free areas around Qasr Al Hosn can be visited without purchasing an entry ticket. No booking task is added for these.
+</div>
+
+<p class="muted"><strong>Important:</strong> The Etihad complimentary stopover hotel is generally a room benefit and meals are not automatically included. Treat any food voucher as an eligibility check in your booking rather than a guaranteed benefit.</p>
+
+<div class="actions">
+<a class="btn small" target="_blank" href="https://www.etihad.com/en/manage">Etihad Manage Booking</a>
+<a class="btn small" target="_blank" href="https://www.etihad.com/en/abu-dhabi/stopover">Etihad Stopover</a>
+</div>
+</div>
+
+<div class="card">
+<h3>📌 Final booking check</h3>
+<div class="checklist">
+<label class="check"><input type="checkbox">Save all Etihad hotel/pass/meal confirmations and QR codes offline</label>
+<label class="check"><input type="checkbox">Save the Sheikh Zayed Grand Mosque registration/confirmation if one is issued</label>
+<label class="check"><input type="checkbox">Recheck the layover benefits against the final flight booking before departure</label>
+</div>
+</div>
+
+<div class="alert"><strong>Keep it simple:</strong> This page intentionally does not contain Madrid attraction bookings or paid Abu Dhabi attraction tickets. Use <strong>Explore</strong> for sightseeing options and <strong>Plan</strong> for the day-by-day schedule.</div>
+</section>
 
 <!-- MORE -->
 <section id="more" class="screen">
 <h2>⋮ More</h2>
 
 <details open><summary>✈️ Flights</summary><div class="detail-body">
-<div class="card"><span class="tag">OUTBOUND</span><h3>TRV → Abu Dhabi → MAD</h3><p><strong>26 Sep • 21:50</strong> from Trivandrum<br><strong>27 Sep • 08:10</strong> Madrid arrival<br>13h 50m • 1 stop</p></div>
-<div class="card"><span class="tag">RETURN</span><h3>MAD → Abu Dhabi → TRV</h3><p><strong>06 Oct • 21:50</strong> from Madrid<br><strong>08 Oct • 02:50</strong> Trivandrum arrival<br>25h 30m • 1 stop</p></div>
-<p class="muted">The supplied screenshot does not show exact Abu Dhabi segment timings. Check the Etihad PNR for those.</p>
+<div class="card"><span class="tag">OUTBOUND</span><h3>TRV → Abu Dhabi → MAD</h3><p><strong>26 Sep • 21:55</strong> from Trivandrum<br><strong>27 Sep • 08:00</strong> Madrid arrival<br>1 stop via Abu Dhabi</p></div>
+<div class="card"><span class="tag">RETURN</span><h3>MAD → Abu Dhabi → TRV</h3><p><strong>06 Oct • 21:00</strong> from Madrid<br><strong>08 Oct • 02:50</strong> Trivandrum arrival<br>1 stop via Abu Dhabi</p></div>
+<p class="muted">Abu Dhabi segment timings: outbound 00:25 arrival / 02:25 departure; return 07:00 arrival / 21:00 departure. Recheck the final Etihad PNR before travel.</p>
 </div></details>
 
 <details><summary>🏨 Hotels</summary><div class="detail-body">
@@ -305,11 +419,11 @@ th{color:var(--muted)}
 
 
 <details><summary>👔 Clothing strategy & daily combinations</summary><div class="detail-body">
-<p class="muted">A practical rotation using the same three formal trousers, two jeans and one casual trouser. You do not need a different pair of trousers every day.</p>
+<p class="muted">A practical rotation using the same three formal trousers, two denim options and white trousers. You do not need a different pair of trousers every day.</p>
 
 <div class="card"><span class="tag">BUSINESS DAY 1 • 28 SEP</span>
 <h3>White shirt + Navy trousers + formal shoes</h3>
-<p class="muted">Clean first-day combination. Use the black belt.</p></div>
+<p class="muted">Clean first-day combination. Use the brown belt.</p></div>
 
 <div class="card"><span class="tag">BUSINESS DAY 2 • 29 SEP</span>
 <h3>Light Blue shirt + Charcoal trousers + formal shoes</h3>
@@ -348,7 +462,7 @@ th{color:var(--muted)}
 <p class="muted">Retiro + Salamanca.</p></div>
 
 <div class="card"><span class="tag">03 OCT • FULL MADRID</span>
-<h3>White or Navy T-shirt + Dark Blue jeans + walking shoes</h3>
+<h3>White or Navy T-shirt + Light Blue Denim + walking shoes</h3>
 <p class="muted">Comfort is the priority for a full sightseeing day.</p></div>
 
 <div class="card"><span class="tag">04 OCT • TOLEDO</span>
@@ -370,10 +484,7 @@ th{color:var(--muted)}
 <div class="alert"><strong>Packing principle:</strong> The formal trousers and shoes are reused during the business week; the same Light Blue Denim, Black/Dark Denim and White trousers are reused for evenings and sightseeing. This keeps the suitcase lighter without sacrificing variety.</div>
 </div></details>
 
-<details><summary>⚠️ Important reminders</summary><div class="detail-body">
-<div class="danger"><strong>UAE:</strong> confirm your visa/entry permission before leaving Abu Dhabi airport.</div>
-<p>Recheck museum free-entry periods, attraction hours and train schedules shortly before the trip.</p>
-</div></details>
+
 
 <details><summary>🔗 Useful links</summary><div class="detail-body">
 <ul>
@@ -383,7 +494,6 @@ th{color:var(--muted)}
 <li><a href="https://www.crtm.es/billete-turistico?lang=en&zona=A" target="_blank">Madrid Transport</a></li>
 <li><a href="https://turismodesegovia.com/" target="_blank">Segovia Tourism</a></li>
 <li><a href="https://visitabudhabi.ae/en/things-to-do/culture/landmarks-and-architecture/sheikh-zayed-grand-mosque" target="_blank">Experience Abu Dhabi</a></li>
-<li><a href="https://www.louvreabudhabi.ae/visit-us" target="_blank">Louvre Abu Dhabi</a></li>
 </ul>
 </div></details>
 </section>
@@ -396,101 +506,29 @@ th{color:var(--muted)}
 <button data-screen="plan" onclick="showScreen('plan')"><span class="icon">📅</span>Plan</button>
 <button data-screen="explore" onclick="showScreen('explore')"><span class="icon">🗺️</span>Explore</button>
 <button data-screen="check" onclick="showScreen('check')"><span class="icon">🎒</span>Check</button>
+<button data-screen="reminders" onclick="showScreen('reminders')"><span class="icon">🔔</span>Reminders</button>
 <button data-screen="more" onclick="showScreen('more')"><span class="icon">⋮</span>More</button>
 </div>
 </nav>
 
 <script>
 const trip = [
- {date:'2026-09-26', label:'26 Sep', title:'Trivandrum → Abu Dhabi', tag:'FLIGHT', events:[
-  ['21:50','Depart Trivandrum (TRV).']
- ]},
- {date:'2026-09-27', label:'27 Sep', title:'Madrid arrival + easy evening', tag:'MADRID', events:[
-  ['08:10','Arrive Madrid → immigration → baggage → Hotel 1.'],
-  ['17:00','Plaza de España → Royal Palace exterior → Almudena.'],
-  ['19:00','Plaza Mayor → Mercado de San Miguel → Sol.'],
-  ['20:30','Gran Vía → dinner → hotel.']
- ]},
- {date:'2026-09-28', label:'28 Sep', title:'Office + Gran Vía', tag:'BUSINESS', events:[
-  ['AM–PM','Conference / workshop.'],
-  ['18:30','Gran Vía → Plaza de España → Royal Palace area.'],
-  ['20:30','Plaza de Oriente → Teatro Real → dinner.']
- ]},
- {date:'2026-09-29', label:'29 Sep', title:'Office + Prado', tag:'BUSINESS', events:[
-  ['AM–PM','Conference / workshop.'],
-  ['18:00–20:00','Prado free-entry period, subject to current rules/capacity.'],
-  ['20:00','Cibeles → Puerta de Alcalá → Retiro edge.']
- ]},
- {date:'2026-09-30', label:'30 Sep', title:'Office + Reina Sofía', tag:'BUSINESS', events:[
-  ['AM–PM','Conference / workshop.'],
-  ['19:00–21:00','Reina Sofía free-entry period. Prioritize Guernica.'],
-  ['21:00+','Atocha / Lavapiés dinner → hotel.']
- ]},
- {date:'2026-10-01', label:'01 Oct', title:'Office + Royal Madrid', tag:'BUSINESS', events:[
-  ['AM–PM','Conference / workshop.'],
-  ['18:00','Royal Palace interior if desired.'],
-  ['20:00','Almudena → Plaza Mayor → Sol → dinner.']
- ]},
- {date:'2026-10-02', label:'02 Oct', title:'Office + Retiro', tag:'BUSINESS', events:[
-  ['AM–PM','Final conference / workshop.'],
-  ['18:30','Puerta de Alcalá → Retiro → Crystal Palace.'],
-  ['20:30','Salamanca / Serrano → dinner.']
- ]},
- {date:'2026-10-03', label:'03 Oct', title:'Full Madrid day', tag:'MADRID', events:[
-  ['09:30','Royal Palace interior.'],
-  ['11:00','Almudena → Plaza Mayor → Sol.'],
-  ['14:00','Retiro Park + Crystal Palace.'],
-  ['17:30','Temple of Debod + Plaza de España.'],
-  ['20:30','Prado de Noche — confirm 2026 schedule.']
- ]},
- {date:'2026-10-04', label:'04 Oct', title:'Toledo + hotel change', tag:'DAY TRIP', events:[
-  ['07:00','Check out / leave luggage at Hotel 1 if possible.'],
-  ['08:00','Atocha.'],
-  ['AM','Train to Toledo.'],
-  ['09:30–18:30','Cathedral → Jewish Quarter → San Juan de los Reyes → Santa María la Blanca → Santo Tomé → Alcázar → Mirador.'],
-  ['EVENING','Return Madrid → collect luggage → taxi to Hotel 2.']
- ]},
- {date:'2026-10-05', label:'05 Oct', title:'Segovia', tag:'DAY TRIP', events:[
-  ['07:45','Hotel 2 → Concha Espina → Chamartín.'],
-  ['09:00','Train to Segovia-Guiomar.'],
-  ['10:15–18:00','Aqueduct → Old Town → Cathedral → Alcázar → Jewish Quarter / viewpoints.'],
-  ['EVENING','Train back → Hotel 2.']
- ]},
- {date:'2026-10-06', label:'06 Oct', title:'Final Madrid → Abu Dhabi', tag:'FLIGHT', events:[
-  ['09:00–12:00','Optional Bernabéu / Salamanca / shopping.'],
-  ['17:30','Leave Hotel 2 for Madrid Airport.'],
-  ['18:00','Target airport arrival.'],
-  ['21:50','Madrid → Abu Dhabi.']
- ]},
- {date:'2026-10-07', label:'07 Oct', title:'Abu Dhabi layover', tag:'ABU DHABI', events:[
-  ['07:00','Arrive Abu Dhabi.'],
-  ['07:00–08:30','Immigration / UAE entry formalities.'],
-  ['09:00–11:00','Sheikh Zayed Grand Mosque — free.'],
-  ['11:00–12:00','Wahat Al Karama — free.'],
-  ['12:15–13:15','Corniche — free.'],
-  ['13:30–15:30','Louvre Abu Dhabi — optional, AED 70 current reference.'],
-  ['15:30–17:00','Heritage Village / Corniche.'],
-  ['17:00–18:00','Return to airport.']
- ]},
- {date:'2026-10-08', label:'08 Oct', title:'Arrive Trivandrum', tag:'HOME', events:[
-  ['02:50','Arrive Trivandrum.']
- ]}
+ {date:'2026-09-26',label:'26 Sep',title:'Trivandrum → Abu Dhabi',tag:'FLIGHT',events:[['21:55','Depart Trivandrum (TRV).'],['00:25','Arrive Abu Dhabi.'],['02:25','Depart Abu Dhabi for Madrid.'],['08:00','Arrive Madrid.']]},
+ {date:'2026-09-27',label:'27 Sep',title:'Arrive Madrid • Rest + Light Sightseeing',tag:'MADRID',events:[['08:00','Arrive Madrid. Immigration, baggage and transfer to Hotel 1.'],['MORNING','Check in / luggage / rest.'],['15:30','Easy neighbourhood walk around Chamberí / José Abascal.'],['17:30','Optional Paseo de la Castellana.'],['19:00','Early dinner and rest.'],['21:30','Back to hotel early for the office week.']]},
+ {date:'2026-09-28',label:'28 Sep',title:'Business Day 1 • Castellana + Ponzano',tag:'BUSINESS + MADRID',events:[['DAY','Company office / conference. Company handles office transport and food.'],['17:00','Paseo de la Castellana — walk from Hotel 1, about 5–10 min. FREE.'],['18:30','Ponzano tapas area — walk from hotel, about 10–15 min. FREE to enter; food paid.'],['20:30+','Solo evening around Ponzano; return walking or by taxi/Metro.']]},
+ {date:'2026-09-29',label:'29 Sep',title:'Business Day 2 • Prado + Cibeles + Gran Vía',tag:'BUSINESS + MADRID',events:[['DAY','Company office / conference.'],['17:00','Leave for Prado. Gregorio Marañón → Line 10 → Tribunal → Line 1 → Estación del Arte. Allow 20–25 min.'],['17:40–18:00','Arrive Prado and prepare for free-entry period.'],['18:00–20:00','Prado Museum — free period Mon–Sat, subject to capacity/admission procedure.'],['20:00','Walk Paseo del Prado → Cibeles → Gran Vía. Outdoor sightseeing FREE.'],['21:00','Continue to Plaza de Colón if desired. FREE.'],['22:00','Return: Sol/Gran Vía → Line 1 → Tribunal → Line 10 → Gregorio Marañón.']]},
+ {date:'2026-09-30',label:'30 Sep',title:'Business Day 3 • Royal Palace + Almudena + Plaza Mayor',tag:'BUSINESS + MADRID',events:[['DAY','Company office / conference.'],['17:00','Gregorio Marañón → Line 10 → Plaza de España; walk through Sabatini Gardens.'],['17:00–19:00','Royal Palace — free window only for eligible visitors; otherwise normal paid ticket.'],['17:30','Almudena Cathedral — walk from Palace; main cathedral area generally FREE, dome/museum paid.'],['19:30','Plaza Mayor + Mercado de San Miguel — walk via Calle Mayor. Plaza FREE; food/drinks paid.'],['21:30+','Optional live music around Plaza de Santa Bárbara / El Junco; check the live-music programme and price.'],['LATE','Return via Sol → Line 1 → Tribunal → Line 10 → Gregorio Marañón.']]},
+ {date:'2026-10-01',label:'01 Oct',title:'Business Day 4 • Reina Sofía + Retiro + Olavide',tag:'BUSINESS + MADRID',events:[['DAY','Company office / conference.'],['17:00','Gregorio Marañón → Line 10 → Tribunal → Line 1 → Atocha. Allow 20–25 min.'],['19:00–21:00','Reina Sofía — current Thursday free period; arrive early and expect possible queue/free-ticket procedure.'],['19:45+','Retiro Park + Crystal Palace — walk from Reina Sofía. FREE outdoor visit.'],['21:00','Plaza de Olavide — Metro/taxi or longer walk. FREE to enter; cafés paid.'],['22:30+','Return to Hotel 1.']]},
+ {date:'2026-10-02',label:'02 Oct',title:'Business Day 5 • Sol + Debod + Churros',tag:'BUSINESS + MADRID',events:[['DAY','Company office / conference.'],['17:30','Gregorio Marañón → Line 10 → Tribunal → Line 1 → Sol. FREE outdoor sightseeing.'],['19:00','Sol → Line 3 → Ventura Rodríguez → walk to Temple of Debod.'],['SUNSET','Debod exterior / sunset viewpoint is FREE. Interior has seasonal controlled hours; do not rely on entry after sunset.'],['20:30','Walk Plaza de España → Gran Vía. FREE.'],['21:30+','Churros + chocolate in the historic centre; plan ~€5–€6.'],['LATE','Plaza de España → Line 10 → Gregorio Marañón.']]},
+ {date:'2026-10-03',label:'03 Oct',title:'Full Madrid Sightseeing',tag:'MADRID',events:[['09:30','Start around Royal Palace / Almudena if not fully visited earlier.'],['11:00','Plaza Mayor → Mercado de San Miguel → Sol.'],['14:00','Retiro Park + Crystal Palace.'],['17:30','Temple of Debod exterior + Plaza de España if not completed on 02 Oct.'],['EVENING','Gran Vía / Cibeles / local dinner.']]},
+ {date:'2026-10-04',label:'04 Oct',title:'Toledo + Hotel Change',tag:'TOLEDO',events:[['07:00','Check out / arrange luggage with Hotel 1 if possible.'],['07:30–08:00','Travel to Madrid Atocha.'],['MORNING','High-speed train Atocha → Toledo, about 30 min.'],['09:30–18:00','Cathedral → Jewish Quarter → San Juan de los Reyes → Santa María la Blanca → Santo Tomé → Alcázar → Mirador del Valle.'],['EVENING','Return Toledo → Madrid, collect luggage, travel to Hotel 2.'],['NIGHT','Rest at Hotel 2.']]},
+ {date:'2026-10-05',label:'05 Oct',title:'Segovia Day Trip',tag:'SEGOVIA',events:[['07:45','Hotel 2 → Concha Espina / Madrid Chamartín.'],['MORNING','High-speed train Chamartín → Segovia-Guiomar.'],['10:15','Arrive / transfer to city centre.'],['10:45–18:00','Aqueduct → Old Town → Cathedral → Alcázar → Jewish Quarter / viewpoints.'],['EVENING','Return to Segovia-Guiomar → Madrid Chamartín → Hotel 2.']]},
+ {date:'2026-10-06',label:'06 Oct',title:'Final Madrid → Abu Dhabi',tag:'FLIGHT',events:[['09:00–12:00','Optional Bernabéu / Salamanca / shopping.'],['AFTERNOON','Return to Hotel 2, collect luggage and have an early meal.'],['17:30','Leave for Madrid Airport.'],['18:00','Target airport arrival.'],['21:00','Madrid → Abu Dhabi.']]},
+ {date:'2026-10-07',label:'07 Oct',title:'Abu Dhabi Layover',tag:'ABU DHABI',events:[['07:00','Arrive Abu Dhabi.'],['07:00–08:30','Immigration / baggage / UAE entry formalities.'],['09:00–11:00','Sheikh Zayed Grand Mosque — FREE; confirm visitor requirements/booking.'],['11:00–12:00','Wahat Al Karama — FREE.'],['12:15–13:15','Corniche — FREE.'],['13:30–14:30','Heritage Village — FREE; explore the traditional village and nearby Corniche.'],['14:45–15:45','The Founder’s Memorial — FREE.'],['16:00–17:00','Qasr Al Hosn free areas / House of Artisans / Cultural Foundation — FREE.'],['17:00–18:00','Return to airport with sufficient buffer.'],['21:00','Abu Dhabi → Trivandrum.']]},
+ {date:'2026-10-08',label:'08 Oct',title:'Arrive Trivandrum',tag:'HOME',events:[['02:50','Arrive Trivandrum.']]}
 ];
 
-const places = [
- {cat:'madrid',title:'Prado Museum',meta:'18:00–20:00 free period • ~20–25 min from Hotel 1',cost:'Free in applicable evening period',note:'Best for 29 Sep.'},
- {cat:'madrid',title:'Reina Sofía',meta:'19:00–21:00 free period • ~20–25 min from Hotel 1',cost:'Free in applicable evening period',note:'See Guernica.'},
- {cat:'madrid',title:'Royal Palace',meta:'~20–25 min from Hotel 1',cost:'Paid interior; exterior free',note:'Best on 03 Oct.'},
- {cat:'madrid',title:'Retiro + Crystal Palace',meta:'~20–25 min from Hotel 1',cost:'Free',note:'Ideal evening.'},
- {cat:'madrid',title:'Temple of Debod',meta:'~20–25 min from Hotel 1',cost:'Free',note:'Best around sunset.'},
- {cat:'madrid',title:'Gran Vía + Plaza de España',meta:'~15–20 min by Metro from Hotel 1',cost:'Free',note:'Easy office-day evening.'},
- {cat:'toledo',title:'Toledo',meta:'Full day • Madrid Atocha → Toledo',cost:'~€64 / ₹7,040',note:'Cathedral, Jewish Quarter, Alcázar, Mirador.'},
- {cat:'segovia',title:'Segovia',meta:'Full day • Chamartín → Segovia-Guiomar',cost:'~€47–52 / ₹5,200–5,720',note:'Aqueduct, Cathedral, Alcázar.'},
- {cat:'abudhabi',title:'Sheikh Zayed Grand Mosque',meta:'09:00–11:00 target',cost:'Free',note:'Confirm UAE entry permission first.'},
- {cat:'abudhabi',title:'Wahat Al Karama',meta:'Near Grand Mosque',cost:'Free',note:'Short cultural/photo stop.'},
- {cat:'abudhabi',title:'Corniche',meta:'12:15–13:15 target',cost:'Free',note:'Waterfront.'},
- {cat:'abudhabi',title:'Louvre Abu Dhabi',meta:'13:30–15:30 optional',cost:'AED 70 current reference',note:'Choose this OR Qasr Al Watan.'}
-];
+const places = [];
 
 function formatDate(d){
  const x=new Date(d+'T12:00:00');
@@ -499,25 +537,27 @@ function formatDate(d){
 function renderPlan(){
  let out='';
  trip.forEach(d=>{
-   const current='';
-   out+=`<details class="day${current}"><summary><span class="tag">${d.tag}</span><div class="day-title">${d.label} — ${d.title}</div></summary><div class="detail-body">`;
+   out+=`<details class="day"><summary><span class="tag">${d.tag}</span><div class="day-title">${d.label} — ${d.title}</div></summary><div class="detail-body">`;
    d.events.forEach(e=>out+=`<div class="event"><div class="time">${e[0]}</div><div>${e[1]}</div></div>`);
    out+='</div></details>';
  });
  document.getElementById('planList').innerHTML=out;
 }
 function renderPlaces(filter='all'){
- let out='';
- places.filter(p=>filter==='all'||p.cat===filter).forEach(p=>{
-  out+=`<div class="card option"><div class="option-info"><div class="option-title">${p.title}</div><div class="option-meta">${p.meta}</div><div class="option-meta">${p.note}</div></div><div><div class="green" style="font-size:12px;text-align:right;margin-bottom:5px">${p.cost}</div></div></div>`;
- });
- document.getElementById('places').innerHTML=out;
+ const cards=[...document.querySelectorAll('#places > details[data-cat]')];
+ cards.forEach(card=>{card.style.display=(filter==='all'||card.dataset.cat===filter)?'block':'none';});
+}
+function closeAllDetails(scope=document){
+ scope.querySelectorAll('details[open]').forEach(d=>d.open=false);
 }
 function filterPlaces(filter,btn){
  document.querySelectorAll('.filter-row button').forEach(x=>x.classList.remove('active'));
- btn.classList.add('active'); renderPlaces(filter);
+ btn.classList.add('active');
+ closeAllDetails(document.getElementById('places'));
+ renderPlaces(filter);
 }
 function showScreen(id){
+ closeAllDetails(document);
  document.querySelectorAll('.screen').forEach(x=>x.classList.remove('active'));
  document.getElementById(id).classList.add('active');
  document.querySelectorAll('.bottom-nav button').forEach(x=>x.classList.toggle('active',x.dataset.screen===id));
