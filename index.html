@@ -115,18 +115,29 @@ th{color:var(--muted)}
 
 <!-- TODAY -->
 <section id="home" class="screen active">
-<h2>Welcome 👋</h2>
+<h2>Trip Overview</h2>
 <div class="card hero-card">
   <span class="tag">26 SEP – 08 OCT 2026</span>
   <div class="big">Madrid Business Trip</div>
   <p class="muted">India → Abu Dhabi → Madrid → Abu Dhabi → India</p>
 </div>
 
+
+<div class="card" id="homeStatus">
+  <span class="tag">TRIP STATUS</span>
+  <h3 id="statusTitle">Preparing for your trip</h3>
+  <p id="statusText" class="muted">Your trip status and next step.</p>
+  <div class="actions">
+    <button class="btn small" onclick="showScreen('plan')">Open Plan</button>
+    <button class="btn small secondary" onclick="showScreen('explore')">Explore</button>
+  </div>
+</div>
+
 <div class="grid">
   <div class="card">
     <div class="muted">💼 Business</div>
     <strong>28 Sep – 02 Oct</strong>
-    <div class="muted">Company handles office travel & food</div>
+    <div class="muted">28 Sep – 02 Oct</div>
   </div>
   <div class="card">
     <div class="muted">🏛️ Day trips</div>
@@ -136,28 +147,13 @@ th{color:var(--muted)}
   <div class="card">
     <div class="muted">🏨 Madrid stay</div>
     <strong>27 Sep – 06 Oct</strong>
-    <div class="muted">Two hotels</div>
+    <div class="muted">27 Sep – 06 Oct</div>
   </div>
   <div class="card">
     <div class="muted">🇦🇪 Layover</div>
     <strong>07 Oct</strong>
-    <div class="muted">Abu Dhabi sightseeing</div>
+    <div class="muted">07 Oct layover</div>
   </div>
-</div>
-
-<div class="card">
-  <h3>✈️ Flight summary</h3>
-  <div class="event"><div class="time">26 Sep</div><div><strong>TRV 21:55</strong> → Madrid 08:00 on 27 Sep</div></div>
-  <div class="event"><div class="time">06 Oct</div><div><strong>MAD 21:00</strong> → Trivandrum 02:50 on 08 Oct</div></div>
-  <p class="muted">1 stop via Abu Dhabi on both journeys.</p>
-</div>
-
-<div class="card">
-  <h3>📍 Key places</h3>
-  <div class="event"><div class="time">Madrid</div><div>Office + evening sightseeing</div></div>
-  <div class="event"><div class="time">Toledo</div><div>04 October</div></div>
-  <div class="event"><div class="time">Segovia</div><div>05 October</div></div>
-  <div class="event"><div class="time">Abu Dhabi</div><div>07 October layover</div></div>
 </div>
 
 </section>
@@ -341,6 +337,42 @@ th{color:var(--muted)}
 </div>
 </div></details>
 
+
+<details><summary>🧭 Offline routes & orientation</summary><div class="detail-body">
+<p class="muted">These are intentionally simple, text-based routes so the essential directions remain available without internet.</p>
+
+<div class="card"><span class="tag">MADRID • HOTEL 1</span>
+<h3>NH Collection Madrid Abascal → Central Madrid</h3>
+<p><strong>Hotel:</strong> Calle de José Abascal, 47</p>
+<p><strong>Metro:</strong> Gregorio Marañón (L7/L10) is the main reference station.</p>
+<p><strong>Prado:</strong> L10 → Tribunal → L1 → Estación del Arte.</p>
+<p><strong>Royal Palace:</strong> L10 → Plaza de España → walk.</p>
+<p><strong>Sol:</strong> L10 → Tribunal → L1 → Sol.</p>
+</div>
+
+<div class="card"><span class="tag">TOLEDO</span>
+<h3>Madrid Atocha → Toledo</h3>
+<p><strong>Train:</strong> High-speed service, about 30 min.</p>
+<p><strong>Arrival:</strong> Toledo station → city centre by local bus/taxi/walk depending on energy.</p>
+<p><strong>Offline sequence:</strong> Station → Cathedral → Jewish Quarter → San Juan de los Reyes → Santo Tomé → Alcázar → Mirador del Valle.</p>
+</div>
+
+<div class="card"><span class="tag">SEGOVIA</span>
+<h3>Madrid Chamartín → Segovia-Guiomar</h3>
+<p><strong>Train:</strong> High-speed service.</p>
+<p><strong>Arrival:</strong> Segovia-Guiomar → city centre by local bus/taxi.</p>
+<p><strong>Offline sequence:</strong> Aqueduct → Old Town → Cathedral → Alcázar → viewpoints.</p>
+</div>
+
+<div class="card"><span class="tag">ABU DHABI</span>
+<h3>Airport → Free sightseeing loop</h3>
+<p><strong>Recommended:</strong> Airport → Sheikh Zayed Grand Mosque → Wahat Al Karama → Corniche → Heritage Village → Founder's Memorial → Qasr Al Hosn free areas → Airport.</p>
+<p><strong>Transport reference:</strong> Use your booked stopover hotel transfer/taxi for the airport-city legs; use taxi between attractions if time is limited.</p>
+</div>
+
+<div class="alert"><strong>Offline rule:</strong> The app stores these routes as reference directions. For live road conditions or turn-by-turn navigation, internet will still be required.</div>
+</div></details>
+
 <details><summary>📌 Final document check</summary><div class="detail-body checklist">
 <label class="check"><input type="checkbox">Enable international card payments</label>
 <label class="check"><input type="checkbox">Save digital document copies offline</label>
@@ -486,16 +518,6 @@ th{color:var(--muted)}
 
 
 
-<details><summary>🔗 Useful links</summary><div class="detail-body">
-<ul>
-<li><a href="https://www.museodelprado.es/en/visit/plan-your-visit" target="_blank">Prado</a></li>
-<li><a href="https://www.museoreinasofia.es/en/visit/individual-visits/" target="_blank">Reina Sofía</a></li>
-<li><a href="https://www.patrimonionacional.es/en/visita/royal-palace-madrid" target="_blank">Royal Palace</a></li>
-<li><a href="https://www.crtm.es/billete-turistico?lang=en&zona=A" target="_blank">Madrid Transport</a></li>
-<li><a href="https://turismodesegovia.com/" target="_blank">Segovia Tourism</a></li>
-<li><a href="https://visitabudhabi.ae/en/things-to-do/culture/landmarks-and-architecture/sheikh-zayed-grand-mosque" target="_blank">Experience Abu Dhabi</a></li>
-</ul>
-</div></details>
 </section>
 
 </main>
@@ -530,6 +552,34 @@ const trip = [
 
 const places = [];
 
+
+function updateHomeStatus(){
+ const now=new Date();
+ const start=new Date('2026-09-26T00:00:00');
+ const end=new Date('2026-10-09T00:00:00');
+ const title=document.getElementById('statusTitle');
+ const text=document.getElementById('statusText');
+ if(!title||!text)return;
+ if(now < start){
+   const days=Math.ceil((start-now)/86400000);
+   title.textContent=`Trip starts in ${days} day${days===1?'':'s'}`;
+   text.textContent='26 Sep • Trivandrum → Abu Dhabi → Madrid. Use Check and Reminders before departure.';
+ }else if(now >= end){
+   title.textContent='Trip completed';
+   text.textContent='08 Oct • Arrived back in Trivandrum. Hope you had a great trip!';
+ }else{
+   const key=now.toISOString().slice(0,10);
+   const today=trip.find(x=>x.date===key);
+   if(today){
+     title.textContent=`Today • ${today.label}`;
+     text.textContent=today.title;
+   }else{
+     title.textContent='Trip in progress';
+     text.textContent='Open Plan for today’s detailed itinerary.';
+   }
+ }
+}
+
 function formatDate(d){
  const x=new Date(d+'T12:00:00');
  return x.toLocaleDateString('en-IN',{weekday:'long',day:'numeric',month:'long'});
@@ -556,6 +606,21 @@ function filterPlaces(filter,btn){
  closeAllDetails(document.getElementById('places'));
  renderPlaces(filter);
 }
+
+document.addEventListener('click',function(e){
+ const summary=e.target.closest('summary');
+ if(!summary)return;
+ const parent=summary.parentElement;
+ if(!parent.matches('details'))return;
+ const screen=parent.closest('.screen');
+ if(!screen)return;
+ setTimeout(()=>{
+   if(parent.open){
+     screen.querySelectorAll('details[open]').forEach(d=>{if(d!==parent)d.open=false;});
+   }
+ },0);
+});
+
 function showScreen(id){
  closeAllDetails(document);
  document.querySelectorAll('.screen').forEach(x=>x.classList.remove('active'));
@@ -577,7 +642,7 @@ function resetChecks(){
  checks.forEach((x,i)=>{x.checked=false;localStorage.removeItem('trip2026_'+i)});
  updateChecks();
 }
-renderPlan();renderPlaces();updateChecks();
+renderPlan();renderPlaces();updateChecks();updateHomeStatus();
 </script>
 </body>
 </html>
