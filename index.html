@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#123b68">
-<title>My Madrid Trip 2026 — Home</title>
+<title>My Madrid Trip 2026 — Travel Guide</title>
 <style>
 :root{
  --blue:#123b68;--blue2:#1e5b91;--green:#0b7a57;--gold:#c58a1b;
@@ -95,6 +95,19 @@ th{color:var(--muted)}
  body{background:#fff}
  .card,details{box-shadow:none;break-inside:avoid}
 }
+
+/* Clothing strategy interaction */
+.outfit-tabs{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0 14px}
+.outfit-tab{opacity:.8}
+.outfit-tab.active{opacity:1;outline:2px solid currentColor}
+.outfit-display{border:1px solid var(--border);border-radius:14px;padding:15px;margin-bottom:12px;background:var(--surface)}
+.outfit-main{font-size:1.05rem;font-weight:700;margin:8px 0}
+.outfit-meta{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
+.outfit-meta div{padding:10px;border-radius:10px;background:var(--surface-2);text-align:center}
+.packing-progress{height:9px;border-radius:99px;overflow:hidden;background:var(--surface-2);margin:12px 0 7px}
+#clothingProgressBar{height:100%;width:0%;transition:width .25s ease;background:currentColor}
+@media(max-width:600px){.outfit-tabs{gap:6px}.outfit-tab{font-size:.78rem;padding:7px 9px}.outfit-meta{grid-template-columns:1fr}}
+
 </style>
 </head>
 <body>
@@ -300,9 +313,9 @@ th{color:var(--muted)}
 <div class="checklist">
 <label class="check"><input type="checkbox">Formal shirt #1 — White</label>
 <label class="check"><input type="checkbox">Formal shirt #2 — Light Blue</label>
-<label class="check"><input type="checkbox">Formal shirt #3 — White</label>
-<label class="check"><input type="checkbox">Formal shirt #4 — Light Blue</label>
-<label class="check"><input type="checkbox">Formal shirt #5 — Light Grey</label>
+<label class="check"><input type="checkbox">Formal shirt #3 — Light Grey</label>
+<label class="check"><input type="checkbox">Formal shirt #4 — Pale / Dusty Pink</label>
+<label class="check"><input type="checkbox">Formal shirt #5 — Steel / Medium Blue</label>
 <label class="check"><input type="checkbox">Formal trousers #1 — Navy</label>
 <label class="check"><input type="checkbox">Formal trousers #2 — Charcoal</label>
 <label class="check"><input type="checkbox">Formal trousers #3 — Black</label>
@@ -326,15 +339,6 @@ th{color:var(--muted)}
 </div>
 </div>
 
-<div class="card">
-<h3>🎨 Simple colour strategy</h3>
-<p class="muted">Keep the main wardrobe neutral so the same trousers work with several shirts and T-shirts.</p>
-<div class="grid">
-<div><strong>Core</strong><br>Navy • Charcoal • Black • White • Grey</div>
-<div><strong>Accent</strong><br>Light Blue • Olive • Beige / Khaki</div>
-</div>
-<p class="muted" style="margin-bottom:0"><strong>Best repeat combinations:</strong> White + Navy • Light Blue + Charcoal • White + Black • Light Grey + Navy • T-shirt + Light Blue Denim • T-shirt + White trousers.</p>
-</div>
 </div></details>
 
 
@@ -421,105 +425,49 @@ th{color:var(--muted)}
 </section>
 
 <!-- MORE -->
-<section id="more" class="screen">
-<h2>⋮ More</h2>
+<section id="outfits" class="screen">
+<h2>Outfits</h2>
+<p class="muted">Your complete business, Madrid evening, Toledo, Segovia and Abu Dhabi outfit strategy. Works offline.</p>
+<div class="card">
+<h3>🎨 Colour strategy</h3>
+<p class="muted">Use five different professional shirt colours so every business day looks different, while reusing the same trousers and brown shoes/belt.</p>
+<div class="grid">
+<div><strong>Business shirts</strong><br>White • Light Blue • Light Grey • Pale/Dusty Pink • Steel/Medium Blue</div>
+<div><strong>Casual accents</strong><br>White • Black • Navy • Grey • Olive</div>
+</div>
+<p class="muted"><strong>Business rotation:</strong> White + Navy • Light Blue + Charcoal • Light Grey + Black • Pale Pink + Navy • Steel Blue + Charcoal.</p>
+<p class="muted" style="margin-bottom:0"><strong>Evening rotation:</strong> White T-shirt + Light Blue Denim • Black T-shirt + Dark Denim • Navy T-shirt + White trousers • Olive T-shirt + Light Blue Denim • Grey T-shirt + Dark Denim.</p>
+</div>
 
-<details open><summary>✈️ Flights</summary><div class="detail-body">
-<div class="card"><span class="tag">OUTBOUND</span><h3>TRV → Abu Dhabi → MAD</h3><p><strong>26 Sep • 21:55</strong> from Trivandrum<br><strong>27 Sep • 08:00</strong> Madrid arrival<br>1 stop via Abu Dhabi</p></div>
-<div class="card"><span class="tag">RETURN</span><h3>MAD → Abu Dhabi → TRV</h3><p><strong>06 Oct • 21:00</strong> from Madrid<br><strong>08 Oct • 02:50</strong> Trivandrum arrival<br>1 stop via Abu Dhabi</p></div>
-<p class="muted">Abu Dhabi segment timings: outbound 00:25 arrival / 02:25 departure; return 07:00 arrival / 21:00 departure. Recheck the final Etihad PNR before travel.</p>
-</div></details>
+<div class="card">
+<h3>👕 Outfit selector</h3>
+<p class="muted">Tap an occasion to see the planned combination. Your selection and “worn” status stay saved on this device.</p>
+<div class="outfit-tabs" id="outfitTabs">
+<button class="btn small outfit-tab active" data-outfit="business1">Business 1</button>
+<button class="btn small outfit-tab" data-outfit="business2">Business 2</button>
+<button class="btn small outfit-tab" data-outfit="business3">Business 3</button>
+<button class="btn small outfit-tab" data-outfit="business4">Business 4</button>
+<button class="btn small outfit-tab" data-outfit="business5">Business 5</button>
+<button class="btn small outfit-tab" data-outfit="evening1">Evening 1</button>
+<button class="btn small outfit-tab" data-outfit="evening2">Evening 2</button>
+<button class="btn small outfit-tab" data-outfit="evening3">Evening 3</button>
+<button class="btn small outfit-tab" data-outfit="evening4">Evening 4</button>
+<button class="btn small outfit-tab" data-outfit="evening5">Evening 5</button>
+<button class="btn small outfit-tab" data-outfit="toledo">Toledo</button>
+<button class="btn small outfit-tab" data-outfit="segovia">Segovia</button>
+<button class="btn small outfit-tab" data-outfit="abudhabi">Abu Dhabi</button>
+</div>
+<div id="selectedOutfit" class="outfit-display"></div>
+<label class="check"><input type="checkbox" id="outfitWorn"> I've worn this outfit</label>
+</div>
 
-<details><summary>🏨 Hotels</summary><div class="detail-body">
-<div class="card"><span class="tag">27 SEP → 04 OCT</span><h3>NH Collection Madrid Abascal</h3><p>Calle de José Abascal, 47</p><p class="muted">Useful Metro: Alonso Cano / Gregorio Marañón.</p></div>
-<div class="card"><span class="tag">04 OCT → 06 OCT</span><h3>Calle de Pardo Bazán 58</h3><p>28016 Madrid</p><p class="muted">Concha Espina ≈ 7 min walk. Colombia ≈ 14 min walk.</p></div>
-</div></details>
-
-<details><summary>💰 Budget</summary><div class="detail-body">
-<p class="muted">Company covers expenses through 04 Oct, as you stated.</p>
-<div class="scroll"><table>
-<tr><th>Item</th><th>Budget</th><th>Comfort</th></tr>
-<tr><td>Madrid transport</td><td>₹5k–7k</td><td>₹8k–10k</td></tr>
-<tr><td>Toledo</td><td>~₹7,040</td><td>₹8k–10k</td></tr>
-<tr><td>Segovia</td><td>₹5.2k–5.7k</td><td>₹6k–8k</td></tr>
-<tr><td>Food 05–06 Oct</td><td>₹6k–9k</td><td>₹10k–15k</td></tr>
-<tr><td>Airport transfer</td><td>₹2k–3k</td><td>₹3k–4k</td></tr>
-<tr><td>Abu Dhabi</td><td>₹3.5k–5k</td><td>₹7k–10k</td></tr>
-</table></div>
-<p><strong>Recommended personal reserve: ₹30,000–35,000</strong></p>
-</div></details>
-
-
-<details><summary>👔 Clothing strategy & daily combinations</summary><div class="detail-body">
-<p class="muted">A practical rotation using the same three formal trousers, two denim options and white trousers. You do not need a different pair of trousers every day.</p>
-
-<div class="card"><span class="tag">BUSINESS DAY 1 • 28 SEP</span>
-<h3>White shirt + Navy trousers + formal shoes</h3>
-<p class="muted">Clean first-day combination. Use the brown belt.</p></div>
-
-<div class="card"><span class="tag">BUSINESS DAY 2 • 29 SEP</span>
-<h3>Light Blue shirt + Charcoal trousers + formal shoes</h3>
-<p class="muted">Repeat the shoes and belt; change the shirt and trousers.</p></div>
-
-<div class="card"><span class="tag">BUSINESS DAY 3 • 30 SEP</span>
-<h3>White shirt + Black trousers + formal shoes</h3>
-<p class="muted">Simple formal combination for the middle of the conference week.</p></div>
-
-<div class="card"><span class="tag">BUSINESS DAY 4 • 01 OCT</span>
-<h3>Light Blue shirt + Navy trousers + formal shoes</h3>
-<p class="muted">Reuses the navy trousers with a different shirt.</p></div>
-
-<div class="card"><span class="tag">BUSINESS DAY 5 • 02 OCT</span>
-<h3>Light Grey shirt + Charcoal trousers + formal shoes</h3>
-<p class="muted">Finish the business week with a lighter combination.</p></div>
-
-<div class="card"><span class="tag">MADRID EVENING 1 • 28 SEP</span>
-<h3>Black T-shirt + Light Blue Denim + casual/walking shoes</h3>
-<p class="muted">Gran Vía / Plaza de España.</p></div>
-
-<div class="card"><span class="tag">MADRID EVENING 2 • 29 SEP</span>
-<h3>Olive T-shirt + White trousers + walking shoes</h3>
-<p class="muted">Prado + Cibeles.</p></div>
-
-<div class="card"><span class="tag">MADRID EVENING 3 • 30 SEP</span>
-<h3>Navy T-shirt + Black / Dark Denim + walking shoes</h3>
-<p class="muted">Reina Sofía + Atocha / Lavapiés.</p></div>
-
-<div class="card"><span class="tag">MADRID EVENING 4 • 01 OCT</span>
-<h3>Grey T-shirt + Light Blue Denim + casual shoes</h3>
-<p class="muted">Royal Palace area + old Madrid.</p></div>
-
-<div class="card"><span class="tag">MADRID EVENING 5 • 02 OCT</span>
-<h3>White T-shirt + White trousers + walking shoes</h3>
-<p class="muted">Retiro + Salamanca.</p></div>
-
-<div class="card"><span class="tag">03 OCT • FULL MADRID</span>
-<h3>White or Navy T-shirt + Light Blue Denim + walking shoes</h3>
-<p class="muted">Comfort is the priority for a full sightseeing day.</p></div>
-
-<div class="card"><span class="tag">04 OCT • TOLEDO</span>
-<h3>Olive T-shirt + White trousers + walking shoes + light jacket</h3>
-<p class="muted">Comfortable for walking on Toledo's streets and viewpoints.</p></div>
-
-<div class="card"><span class="tag">05 OCT • SEGOVIA</span>
-<h3>Grey T-shirt + Light Blue Denim + walking shoes + light jacket</h3>
-<p class="muted">Good for a full day around the Aqueduct, Old Town and Alcázar.</p></div>
-
-<div class="card"><span class="tag">06 OCT • FINAL MADRID</span>
-<h3>Black T-shirt + Black / Dark Denim + casual shoes</h3>
-<p class="muted">Easy final-day outfit before the evening flight.</p></div>
-
-<div class="card"><span class="tag">07 OCT • ABU DHABI</span>
-<h3>White/Light Grey T-shirt + lightweight trousers or shorts + comfortable shoes</h3>
-<p class="muted">Choose the lightest option for the warmer Abu Dhabi weather; keep the outfit accessible during the layover.</p></div>
-
-<div class="alert"><strong>Packing principle:</strong> The formal trousers and shoes are reused during the business week; the same Light Blue Denim, Black/Dark Denim and White trousers are reused for evenings and sightseeing. This keeps the suitcase lighter without sacrificing variety.</div>
-</div></details>
-
-
+<div class="card">
+<h3>🧳 Clothing packing status</h3>
+<div class="packing-progress"><div id="clothingProgressBar"></div></div>
+<p id="clothingProgressText" class="muted">0 clothing items packed</p>
+<p class="muted">The full packing checklist above remains the single source of truth.</p>
 
 </section>
-
 </main>
 
 <nav class="bottom-nav">
@@ -529,7 +477,7 @@ th{color:var(--muted)}
 <button data-screen="explore" onclick="showScreen('explore')"><span class="icon">🗺️</span>Explore</button>
 <button data-screen="check" onclick="showScreen('check')"><span class="icon">🎒</span>Check</button>
 <button data-screen="reminders" onclick="showScreen('reminders')"><span class="icon">🔔</span>Reminders</button>
-<button data-screen="more" onclick="showScreen('more')"><span class="icon">⋮</span>More</button>
+<button data-screen="outfits" onclick="showScreen('outfits')"><span class="icon">👔</span>Outfits</button>
 </div>
 </nav>
 
@@ -643,6 +591,51 @@ function resetChecks(){
  updateChecks();
 }
 renderPlan();renderPlaces();updateChecks();updateHomeStatus();
+
+const outfitPlans={
+ business1:{title:"Business Day 1",date:"28 Sep",shirt:"🤍 White shirt",trouser:"🔵 Navy trousers",shoes:"🟤 Brown shoes + belt",note:"Professional opening-day combination."},
+ business2:{title:"Business Day 2",date:"29 Sep",shirt:"🩵 Light Blue shirt",trouser:"⚫ Charcoal trousers",shoes:"🟤 Brown shoes + belt",note:"Professional with a softer European business tone."},
+ business3:{title:"Business Day 3",date:"30 Sep",shirt:"🩶 Light Grey shirt",trouser:"⚫ Black trousers",shoes:"🟤 Brown shoes + belt",note:"Clean, understated professional look."},
+ business4:{title:"Business Day 4",date:"01 Oct",shirt:"🩷 Pale / Dusty Pink shirt",trouser:"🔵 Navy trousers",shoes:"🟤 Brown shoes + belt",note:"Adds colour while staying professional."},
+ business5:{title:"Business Day 5",date:"02 Oct",shirt:"🟦 Steel / Medium Blue shirt",trouser:"⚫ Charcoal trousers",shoes:"🟤 Brown shoes + belt",note:"Strong but relaxed final business-day look."},
+ evening1:{title:"Madrid Evening 1",date:"Evening",shirt:"🫒 Olive T-shirt",trouser:"👖 Light Blue Denim",shoes:"👟 Walking / smart-casual shoes",note:"Relaxed city-walking combination."},
+ evening2:{title:"Madrid Evening 2",date:"Evening",shirt:"🤍 White T-shirt",trouser:"👖 Dark Denim",shoes:"👟 Walking / smart-casual shoes",note:"Simple and versatile."},
+ evening3:{title:"Madrid Evening 3",date:"Evening",shirt:"🔵 Navy T-shirt",trouser:"🤍 White trousers",shoes:"👟 Casual shoes",note:"Clean evening look."},
+ evening4:{title:"Madrid Evening 4",date:"Evening",shirt:"🩶 Grey T-shirt",trouser:"👖 Light Blue Denim",shoes:"👟 Walking / smart-casual shoes",note:"Comfortable for a relaxed evening."},
+ evening5:{title:"Madrid Evening 5",date:"Evening",shirt:"⚫ Black T-shirt",trouser:"👖 Dark Denim",shoes:"🧥 Light jacket + 👟 casual/walking shoes",note:"Good for a later-night city outing."},
+ toledo:{title:"Toledo",date:"04 Oct",shirt:"🫒 Olive T-shirt",trouser:"👖 Light Blue Denim",shoes:"👟 Comfortable walking shoes",note:"Prioritise comfort for uneven streets and long walking."},
+ segovia:{title:"Segovia",date:"05 Oct",shirt:"🔵 Navy T-shirt",trouser:"👖 Dark Denim",shoes:"👟 Comfortable walking shoes",note:"Comfort-focused sightseeing combination."},
+ abudhabi:{title:"Abu Dhabi",date:"07 Oct",shirt:"🤍 Light-coloured T-shirt",trouser:"🤍 Lightweight / white trousers",shoes:"👟 Comfortable shoes",note:"Keep the light jacket accessible for air-conditioned areas and dress appropriately for the Grand Mosque."}
+};
+function renderOutfit(key){
+ const o=outfitPlans[key]||outfitPlans.business1, el=document.getElementById("selectedOutfit");
+ if(!el)return;
+ el.innerHTML=`<h4>${o.title}</h4><div class="muted">${o.date}</div><div class="outfit-main">${o.shirt} + ${o.trouser} + ${o.shoes}</div><div class="outfit-meta"><div><strong>Shirt</strong><br>${o.shirt}</div><div><strong>Trousers</strong><br>${o.trouser}</div><div><strong>Shoes</strong><br>${o.shoes}</div></div><p class="muted">${o.note}</p>`;
+ document.querySelectorAll(".outfit-tab").forEach(b=>b.classList.toggle("active",b.dataset.outfit===key));
+ const cb=document.getElementById("outfitWorn");
+ if(cb){cb.checked=localStorage.getItem("outfit-worn-"+key)==="1";cb.dataset.key=key;}
+ localStorage.setItem("selected-outfit",key);
+}
+function initClothingStrategy(){
+ const tabs=document.querySelectorAll(".outfit-tab");
+ if(!tabs.length)return;
+ tabs.forEach(b=>b.addEventListener("click",()=>renderOutfit(b.dataset.outfit)));
+ const cb=document.getElementById("outfitWorn");
+ if(cb)cb.addEventListener("change",()=>localStorage.setItem("outfit-worn-"+cb.dataset.key,cb.checked?"1":"0"));
+ renderOutfit(localStorage.getItem("selected-outfit")||"business1");
+ updateClothingProgress();
+}
+function updateClothingProgress(){
+ const checks=[...document.querySelectorAll('#checklist input[type="checkbox"]')];
+ const clothing=checks.filter(c=>/shirt|t-shirt|trouser|denim|jeans|shorts|shoes|socks|undershirts|belt|sleepwear|jacket/.test((c.parentElement?.textContent||"").toLowerCase()));
+ const done=clothing.filter(c=>c.checked).length,total=clothing.length;
+ const bar=document.getElementById("clothingProgressBar"),txt=document.getElementById("clothingProgressText");
+ if(bar)bar.style.width=(total?Math.round(done/total*100):0)+"%";
+ if(txt)txt.textContent=`${done} / ${total} clothing items packed`;
+}
+document.addEventListener("change",e=>{if(e.target.matches('#checklist input[type="checkbox"]'))updateClothingProgress();});
+initClothingStrategy();
+
 </script>
 </body>
 </html>
