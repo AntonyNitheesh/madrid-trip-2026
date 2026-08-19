@@ -146,29 +146,21 @@ th{color:var(--muted)}
   </div>
 </div>
 
-<div class="grid">
-  <div class="card">
-    <div class="muted">💼 Business</div>
-    <strong>28 Sep – 02 Oct</strong>
-    <div class="muted">28 Sep – 02 Oct</div>
-  </div>
-  <div class="card">
-    <div class="muted">🏛️ Day trips</div>
-    <strong>04 & 05 Oct</strong>
-    <div class="muted">Toledo & Segovia</div>
-  </div>
-  <div class="card">
-    <div class="muted">🏨 Madrid stay</div>
-    <strong>27 Sep – 06 Oct</strong>
-    <div class="muted">27 Sep – 06 Oct</div>
-  </div>
-  <div class="card">
-    <div class="muted">🇦🇪 Layover</div>
-    <strong>07 Oct</strong>
-    <div class="muted">07 Oct layover</div>
-  </div>
-</div>
 
+
+
+<div class="card preflight-card">
+<h3>✈️ Before leaving for the airport</h3>
+<div class="checklist compact">
+<label class="check"><input type="checkbox" data-preflight="passport">Passport</label>
+<label class="check"><input type="checkbox" data-preflight="phone">Phone</label>
+<label class="check"><input type="checkbox" data-preflight="wallet">Wallet / cards</label>
+<label class="check"><input type="checkbox" data-preflight="laptop">Laptop</label>
+<label class="check"><input type="checkbox" data-preflight="chargers">Chargers / adapter</label>
+<label class="check"><input type="checkbox" data-preflight="luggage">Luggage</label>
+<label class="check"><input type="checkbox" data-preflight="flight">Flight checked</label>
+</div>
+</div>
 </section>
 
 <!-- PLAN -->
@@ -180,7 +172,7 @@ th{color:var(--muted)}
 
 <!-- EXPLORE -->
 <section id="explore" class="screen">
-<h2>🗺️ Explore</h2>
+<h2>🗺️ Explore</h2><p class="muted">Reference view: open only the place you need. Each card keeps time, travel, ticket and key notes together.</p>
 <p class="muted">Browse destinations and sightseeing options. Tap a place for details. Your detailed day-by-day route is in <strong>Plan</strong>.</p>
 <div class="filter-row">
 <button class="active" onclick="filterPlaces('all',this)">All</button><button onclick="filterPlaces('madrid',this)">🇪🇸 Madrid</button><button onclick="filterPlaces('toledo',this)">🏛️ Toledo</button><button onclick="filterPlaces('segovia',this)">🏰 Segovia</button><button onclick="filterPlaces('abudhabi',this)">🇦🇪 Abu Dhabi</button>
@@ -542,6 +534,10 @@ document.addEventListener('click',function(e){
  },0);
 });
 
+
+function closeOpenDetails(){
+ document.querySelectorAll('details[open]').forEach(d=>d.open=false);
+}
 function showScreen(id){
  closeAllDetails(document);
  document.querySelectorAll('.screen').forEach(x=>x.classList.remove('active'));
@@ -554,10 +550,20 @@ checks.forEach((x,i)=>{
  x.checked=localStorage.getItem('trip2026_'+i)==='1';
  x.addEventListener('change',()=>{localStorage.setItem('trip2026_'+i,x.checked?'1':'0');updateChecks()});
 });
+ closeOpenDetails();
 function updateChecks(){
  const done=checks.filter(x=>x.checked).length,pct=Math.round(done/checks.length*100);
  document.getElementById('bar').style.width=pct+'%';
  document.getElementById('status').textContent=`${done} of ${checks.length} completed (${pct}%)`;
+}
+
+function initPreflight(){
+ const boxes=document.querySelectorAll('[data-preflight]');
+ boxes.forEach(box=>{
+   const key='preflight-'+box.dataset.preflight;
+   box.checked=localStorage.getItem(key)==='1';
+   box.addEventListener('change',()=>localStorage.setItem(key,box.checked?'1':'0'));
+ });
 }
 function resetChecks(){
  checks.forEach((x,i)=>{x.checked=false;localStorage.removeItem('trip2026_'+i)});
